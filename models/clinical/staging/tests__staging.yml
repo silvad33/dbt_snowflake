@@ -1,0 +1,13 @@
+version: 2
+
+models:
+  - name: stg_azure__ambryjsondetail
+    columns:
+      - name: ambryTestDetailKey
+        tests:
+          - unique:
+              config:
+                severity: error
+                error_if: ">10"
+                warn_if: ">0"
+          - not_null

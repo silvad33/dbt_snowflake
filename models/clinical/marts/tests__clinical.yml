@@ -1,0 +1,227 @@
+version: 2
+
+models:
+  - name: fact_ambrytestdetail
+    columns:
+      - name: ambryTestDetailKey
+        tests:
+          - unique:
+              config:
+                severity: error
+                error_if: ">10"
+                warn_if: ">0"
+          - not_null
+      - name: clinicianKey
+        tests:
+          - not_null
+          - relationships:
+              config:
+                  severity: error
+                  error_if: ">10"
+                  warn_if: ">0"
+              to: ref('dim_clinician')
+              field: clinicianKey
+                
+      - name: otherGeneMutationKey
+        tests:
+          - relationships:
+              config:
+                  severity: error
+                  error_if: ">10"
+                  warn_if: ">0"
+              to: ref('dim_genemutation')
+              field: geneMutationKey
+      - name: patientKey
+        tests:
+          - not_null
+          - relationships:
+              config:
+                  severity: error
+                  error_if: ">10"
+                  warn_if: ">0"
+              to: ref('dim_patient')
+              field: patientKey
+      - name: symptomKey
+        tests:
+          - relationships:
+              config:
+                  severity: error
+                  error_if: ">10"
+                  warn_if: ">0"
+              to: ref('dim_symptom')
+              field: symptomKey
+      - name: testingOrganizationKey
+        tests:
+          - not_null
+          - relationships:
+              config:
+                  severity: error
+                  error_if: ">10"
+                  warn_if: ">0"
+              to: ref('dim_testingorganization')
+              field: testingOrganizationKey
+      - name: testingOrganizationAddressKey
+        tests:
+          - not_null
+          - relationships:
+              config:
+                  severity: error
+                  error_if: ">10"
+                  warn_if: ">0"
+              to: ref('dim_testingorganizationaddress')
+              field: testingOrganizationAddressKey
+      - name: patientOtherGeneMutationKey
+        tests:
+          - relationships:
+              config:
+                  severity: error
+                  error_if: ">10"
+                  warn_if: ">0"
+              to: ref('xref_patientgenemutation')
+              field: patientGeneMutationKey
+      - name: patientSymptomKey
+        tests:
+          - relationships:
+              config:
+                  severity: error
+                  error_if: ">10"
+                  warn_if: ">0"
+              to: ref('xref_patientsymptom')
+              field: patientSymptomKey
+  - name: fact_ambrytestsummary
+    columns:
+      - name: ambryTestKey
+        tests:
+          - unique:
+              config:
+                  severity: error
+                  error_if: ">10"
+                  warn_if: ">0"
+          - not_null
+      - name: clinicianKey
+        tests:
+          - not_null
+          - relationships:
+              config:
+                  severity: error
+                  error_if: ">10"
+                  warn_if: ">0"
+              to: ref('dim_clinician')
+              field: clinicianKey
+      - name: patientKey
+        tests:
+          - not_null
+          - relationships:
+              config:
+                  severity: error
+                  error_if: ">10"
+                  warn_if: ">0"
+              to: ref('dim_patient')
+              field: patientKey
+      - name: testingOrganizationKey
+        tests:
+          - not_null
+          - relationships:
+              config:
+                  severity: error
+                  error_if: ">10"
+                  warn_if: ">0"
+              to: ref('dim_testingorganization')
+              field: testingOrganizationKey
+      - name: testingOrganizationAddressKey
+        tests:
+          - not_null
+          - relationships:
+              config:
+                  severity: error
+                  error_if: ">10"
+                  warn_if: ">0"
+              to: ref('dim_testingorganizationaddress')
+              field: testingOrganizationAddressKey
+  - name: dim_clinician
+    columns:
+      - name: clinicianKey
+        tests:
+          - unique:
+              config:
+                  severity: error
+                  error_if: ">10"
+                  warn_if: ">0"
+          - not_null
+  - name: dim_genemutation
+    columns:
+      - name: geneMutationKey
+        tests:
+          - unique:
+              config:
+                  severity: error
+                  error_if: ">10"
+                  warn_if: ">0"
+          - not_null
+  - name: dim_patient
+    columns:
+      - name: patientKey
+        tests:
+          - unique:
+              config:
+                  severity: error
+                  error_if: ">10"
+                  warn_if: ">0"
+          - not_null
+      - name: patientAccessionNumberNK
+        tests:
+          - not_null:
+              config:
+                  severity: error
+                  error_if: ">10"
+                  warn_if: ">0"
+  - name: dim_symptom
+    columns:
+      - name: symptomKey
+        tests:
+          - unique:
+              config:
+                  severity: error
+                  error_if: ">10"
+                  warn_if: ">0"
+          - not_null
+  - name: dim_testingorganization
+    columns:
+      - name: testingOrganizationKey
+        tests:
+          - unique:
+              config:
+                  severity: error
+                  error_if: ">10"
+                  warn_if: ">0"
+          - not_null
+  - name: dim_testingorganizationaddress
+    columns:
+      - name: testingOrganizationAddressKey
+        tests:
+          - unique:
+              config:
+                  severity: error
+                  error_if: ">10"
+                  warn_if: ">0"
+          - not_null
+  - name: xref_patientgenemutation
+    columns:
+      - name: patientGeneMutationKey
+        tests:
+          - unique:
+              config:
+                  severity: error
+                  error_if: ">10"
+                  warn_if: ">0"
+          - not_null
+  - name: xref_patientsymptom
+    columns:
+      - name: patientSymptomKey
+        tests:
+          - unique:
+              config:
+                severity: error
+                error_if: ">10"
+                warn_if: ">0"
+          - not_null

@@ -1,0 +1,7 @@
+version: 2
+
+sources:
+  - name: ambry_json
+    schema: landing_zone
+    tables:
+      - name: LND_AZURE_PIPE_INGEST_AMBRY_JSON
